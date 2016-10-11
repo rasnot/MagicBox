@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from DataBox.views import *
 
 urlpatterns = [
+    url(r'^$', hello),
     url(r'^admin/', admin.site.urls),
+    url(r'^index/$', display_meta),
 ]
