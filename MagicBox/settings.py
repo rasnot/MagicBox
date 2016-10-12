@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'MagicBox.DataBox'
+    'DataBox',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'MagicBox.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydb.sqlite',
+        'NAME': 'MagicBox.sqlite',
     },
     # 'postgres': {
     #     'ENGINE': 'django.db.backends.postgresql',

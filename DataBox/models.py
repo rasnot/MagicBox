@@ -3,8 +3,9 @@ from __future__ import unicode_literals
 from django.db import models
 
 
-#название словаря
+
 class Dictionary(models.Model):
+    """Модель для роботи із словниками"""
     #pid = models.IntegerField(blank=True, null=True) #parent id, ????
     name = models.CharField(max_length=256)
     is_system = models.BooleanField(default=False)
@@ -21,6 +22,7 @@ class Dictionary(models.Model):
 
 
 class DictionaryValue(models.Model):
+    """Модель для роботи із значеннями словників"""
     dictionary = models.ForeignKey(Dictionary, db_column='dict_id')
     #pid = models.IntegerField(null=True)
     value = models.CharField(max_length=512)
@@ -48,14 +50,24 @@ class DictionaryValue(models.Model):
         return self.value
 
 
-#название dataseta, и его зависящих таблиц
 class DataSet(models.Model):
-    pid = models.IntegerField(blank=True, null=True) #parent id, от кого зависит
+    """Модель для роботи із DataSet-ами та їхніми таблицями"""
+    pid = models.IntegerField(blank=True, null=True)    # parent id, от кого зависит
     long_name = models.CharField(max_length=512)
     short_name = models.CharField(max_length=256, blank=True)
-    uid = models.IntegerField(blank=True, null=True) #id таблицы, для реализации языка
+    country_id = models.ForeignKey(
+        DictionaryValue,
+        null=True,
+        db_column='dict_country_id',
+        related_name='dict_country_id')    # поле при'язки до країни
+    region_id = models.ForeignKey(
+        DictionaryValue,
+        null=True,
+        db_column='dict_region_id',
+        related_name='dict_region_id')      # поле прив'язки до регіону(обл)
+    uid = models.IntegerField(blank=True, null=True)        # id таблицы, для реализации языка
     language_id = models.IntegerField(default=1)
-    user_id = models.IntegerField(blank=True, null=True) #кто создал
+    user_id = models.IntegerField(blank=True, null=True)    # кто создал
     date_create = models.DateTimeField
 
     class Meta:
@@ -66,14 +78,15 @@ class DataSet(models.Model):
 
 
 class DataSetAttribute(models.Model):
+    """Модель для створення атрибутів DataSet"""
     #pid = models.IntegerField(null=True)
-    dataSet = models.ForeignKey(DataSet, db_column='dataset_id') #id таблицы с данными
-    dictionary = models.ForeignKey(Dictionary, null=True, db_column='dict_id') #если колонка ссылается на табл
+    dataSet = models.ForeignKey(DataSet, db_column='dataset_id')    # id таблицы с данными
+    dictionary = models.ForeignKey(Dictionary, null=True, db_column='dict_id')    # якщо значення береться із довідника
     long_name = models.CharField(max_length=512)
-    short_name = models.CharField(max_length=256, blank=True)
-    column = models.ForeignKey(DictionaryValue, db_column='column_info_id') #тип колонки char, int, bool...
+    short_name = models.CharField(max_length=256)
+    column = models.ForeignKey(DictionaryValue, db_column='dict_column_info_id')  # тип колонки char, int, bool...
     uid = models.IntegerField(blank=True, null=True)
-    user_id = models.IntegerField(blank=True, null=True) #в случае изменения
+    user_id = models.IntegerField(blank=True, null=True)    # в случае изменения
     date_create = models.DateTimeField
 
     class Meta:
@@ -84,6 +97,7 @@ class DataSetAttribute(models.Model):
 
 
 class DataSetValue(models.Model):
+    """Модель для роботи із значеннями DataSet"""
     dataSet = models.ForeignKey(DataSet, db_column='dataset_id')
     value = models.TextField()
     uid = models.IntegerField(blank=True, null=True)
