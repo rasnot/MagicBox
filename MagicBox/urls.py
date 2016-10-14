@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$', hello),
     url(r'^admin/', admin.site.urls),
     url(r'^index/$', display_meta),
+    url(r'^add_dictionary/$', add_dictionary),
 ]
