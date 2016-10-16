@@ -5,10 +5,13 @@
     <title>{% block title %}MagicBox{% endblock %}</title>
 </head>
 <body>
+    {% block  %}
     {% block content %}{% endblock %}
     {% block footer %}
+    <div class="footer">
     <hr>
-    <center><p>Successful Corporation. 2016</p></center>
+    <center><p>&copy; Successful Corporation. 2016</p></center>
     {% endblock %}
+    </div>
 </body>
 </html>

@@ -1,13 +1,25 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
+from DataBox.models import *
 import datetime
 from .forms import Add_New_Dictionary
+
 
 def hello(request):
     ip = request.META['REMOTE_ADDR']
     return render_to_response('index.html', locals())
 
+
+def datasets(request):
+    ds = DataSet.objects.filter(is_table=False)
+    return render_to_response('datasets.html', locals())
+
+
+def dataset(request, id):
+    ds = DataSet.objects.filter(id=id)[0]
+    tables = DataSet.objects.filter(dataSet=id)
+    return render_to_response('dataset.html', locals())
 
 def display_meta(request):
     values = request.META.items()

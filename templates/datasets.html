@@ -1,0 +1,16 @@
+{% extends 'base\base.html' %}
+{% block content %}
+    <h1>DataSets</h1>
+    <hr>
+    <p>Вітаємо у найбільшому сховищі даних!</p>
+    <table border="1">
+    <tr>
+        <th>Назва DataSet</th>
+    </tr>
+    {% for dataSet in ds %}
+        <tr>
+            <td><a href="/dataset/{{ dataSet.id }}">{{ dataSet.long_name }}</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
