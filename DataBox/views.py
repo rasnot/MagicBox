@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from DataBox.models import *
 import datetime
 from django.template import RequestContext
@@ -24,6 +24,7 @@ def dataset(request, id):
     tables = DataSet.objects.filter(dataSet=id)
     return render_to_response('dataset.html', locals())
 
+
 def display_meta(request):
     values = request.META.items()
     html = []
@@ -35,6 +36,7 @@ def display_meta(request):
 def current_datetime(request):
     now = datetime.datetime.now()
     return render_to_response('current_datetime.html', locals())  # locals() -> {'current_date': now}
+
 
 def add_dictionary(request):
     if request.method == "POST":
