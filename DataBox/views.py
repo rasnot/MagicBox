@@ -14,28 +14,31 @@ def hello(request):
     return render_to_response('index.html', locals())
 
 
-def datasets(request):
-    ds = DataSet.objects.filter(is_table=False)
-    return render_to_response('datasets.html', locals())
+def get_objects(request):
+    """Отримання всіх DataSet або словників"""
+    url = ''
+    if '/datasets/' in request.get_full_path():
+        ds = DataSet.objects.filter(is_table=False)
+        url = 'datasets.html'
+    if '/dictionaries/' in request.get_full_path():
+        d = Dictionary.objects.all()
+        url = 'dictionaries.html'
+    #url = request.get_full_path()
+    return render_to_response(url, locals())
 
 
 def dataset(request, id):
-    ds = DataSet.objects.filter(id=id)[0]
+    """Відображення конкретного DataSet"""
+    ds = DataSet.objects.get(id=id)
     tables = DataSet.objects.filter(dataSet=id)
     return render_to_response('dataset.html', locals())
 
 
-def display_meta(request):
-    values = request.META.items()
-    html = []
-    for k, v in values:
-        html.append('<tr><td>%s</td><td>%s</td></tr>' % (k, v))
-    return HttpResponse('<table>%s</table>' % '\n'.join(html))
-
-
-def current_datetime(request):
-    now = datetime.datetime.now()
-    return render_to_response('current_datetime.html', locals())  # locals() -> {'current_date': now}
+def dictionary(request, id):
+    """Відображення конкретного словника"""
+    d = Dictionary.objects.get(id=id)
+    dv = DictionaryValue.objects.filter(dictionary=id)
+    return render_to_response('dictionary.html', locals())
 
 
 def add_dictionary(request):
@@ -43,12 +46,12 @@ def add_dictionary(request):
         form = Add_New_Dictionary(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            dictionary = Dictionary(name = cd['name'])
+            dictionary = Dictionary(name=cd['name'])
             dictionary.save()
             return HttpResponseRedirect(r'index/$')
     else:
         form = Add_New_Dictionary()
-    c=locals()
+    c = locals()
     c.update(csrf(request))
     return render_to_response('add_new_dictionary.html', locals())
 

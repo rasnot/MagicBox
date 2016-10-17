@@ -7,7 +7,11 @@ class DataSetAdmin(admin.ModelAdmin):
     #ordering = ['id',]
 
 
-admin.site.register(Dictionary)
+class DictionaryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'is_system')
+
+
+admin.site.register(Dictionary, DictionaryAdmin)
 admin.site.register(DictionaryValue)
 admin.site.register(DataSet, DataSetAdmin)
 admin.site.register(DataSetAttribute)

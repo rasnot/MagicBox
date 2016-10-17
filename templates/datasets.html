@@ -2,15 +2,20 @@
 {% block content %}
     <h1>DataSets</h1>
     <hr>
-    <p>Вітаємо у найбільшому сховищі даних!</p>
-    <table border="1">
-    <tr>
-        <th>Назва DataSet</th>
-    </tr>
-    {% for dataSet in ds %}
+    {% if ds %}
+        <table class="table table-striped table-bordered table-hover" style="width:90%" align="center">
+        <thead>
         <tr>
-            <td><a href="/dataset/{{ dataSet.id }}">{{ dataSet.long_name }}</a></td>
+            <th>Назва DataSet</th>
         </tr>
-    {% endfor %}
-    </table>
+        </thead>
+        <tbody>
+        {% for dataSet in ds %}
+            <tr>
+                <td><a href="/dataset/{{ dataSet.id }}">{{ dataSet.long_name }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% endif %}
 {% endblock %}

@@ -1,6 +1,15 @@
 {% extends 'base\base.html' %}
 {% block content %}
-    <h1>DataSets</h1>
+    <h2>{{ d.name }}</h2>
     <hr>
-    <p>Вітаємо у найбільшому сховищі даних!</p>
+    <table border="1">
+    <tr>
+        <th>Значення</th>
+    </tr>
+    {% for v in dv %}
+        <tr>
+            <td>{{ v.value }}</td>
+        </tr>
+    {% endfor %}
+    </table>
 {% endblock %}
