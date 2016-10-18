@@ -5,7 +5,7 @@ from DataBox.models import *
 import datetime
 from django.template import RequestContext
 from django.template.context_processors import csrf
-from DataBox.forms import Add_New_Dictionary
+from DataBox.forms import *
 from DataBox.models import Dictionary
 
 
@@ -14,17 +14,13 @@ def hello(request):
     return render_to_response('index.html', locals())
 
 
-def get_objects(request):
+def get_objects(request, template_name):
     """Отримання всіх DataSet або словників"""
-    url = ''
-    if '/datasets/' in request.get_full_path():
+    if template_name == 'datasets.html':
         ds = DataSet.objects.filter(is_table=False)
-        url = 'datasets.html'
-    if '/dictionaries/' in request.get_full_path():
+    if template_name == 'dictionaries.html':
         d = Dictionary.objects.all()
-        url = 'dictionaries.html'
-    #url = request.get_full_path()
-    return render_to_response(url, locals())
+    return render_to_response(template_name, locals())
 
 
 def dataset(request, id):
@@ -48,11 +44,24 @@ def add_dictionary(request):
             cd = form.cleaned_data
             dictionary = Dictionary(name=cd['name'])
             dictionary.save()
-            return HttpResponseRedirect(r'index/$')
+            return HttpResponseRedirect(r'index/')
     else:
         form = Add_New_Dictionary()
     c = locals()
     c.update(csrf(request))
     return render_to_response('add_new_dictionary.html', locals())
 
+
+def add_dataset(request):
+    if request.method == 'POST':
+        form = DataSetForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            ds = DataSet(long_name=cd['long_name'], short_name=cd['short_name'], date_create=datetime.datetime.now())
+            ds.save()
+            return HttpResponseRedirect(r'/datasets/')
+    else:
+        form = DataSetForm()
+    locals().update(csrf(request))
+    return render_to_response('add_dataset.html', locals())
 #def views_list_of_dictionary

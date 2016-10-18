@@ -9,13 +9,15 @@
     <title>{% block title %}MagicBox{% endblock %}</title>
 </head>
 <body>
-    {% block home %}<h1><a href="/">MagicBox</a></h1>{% endblock %}
-    {% block content %}{% endblock %}
-    {% block footer %}
-    <div class="footer">
-    <hr>
-    <center><p>&copy; Successful Corporation. 2016</p></center>
-    {% endblock %}
+    <div class="container">
+        {% block home %}<h1><a href="/">MagicBox</a></h1>{% endblock %}
+        {% block content %}{% endblock %}
+        {% block footer %}
+        <div class="footer">
+            <hr>
+            <center><p>&copy; Successful Corporation. 2016</p></center>
+            {% endblock %}
+        </div>
     </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="818827933">
+  <component name="DataSourceManagerImpl" format="xml">
     <data-source source="LOCAL" name="Sqlite (Xerial) - MagicBox.sqlite" uuid="3cd27ef2-bcef-4431-a0e4-5272f882bfc1">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>

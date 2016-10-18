@@ -89,6 +89,8 @@ class DataSet(models.Model):
     class Meta:
         db_table = 'dataset'
 
+    __name__ = 'dataset'
+
     def __str__(self):
         return '%s %s %s' % (self.id, ('table' if self.is_table else 'null'), self.long_name)
     #
