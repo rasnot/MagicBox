@@ -1,0 +1,16 @@
+{% extends 'base\base.html' %}
+{% block content %}
+    <h1>Словники</h1>
+    <hr>
+    <p><a href="/add_dictionary/">Додати словник</a></p>
+    <table border="1">
+    <tr>
+        <th>Назва словника</th>
+    </tr>
+    {% for dictionary in d %}
+        <tr>
+            <td><a href="/dictionary/{{ dictionary.id }}">{{ dictionary.name }}</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

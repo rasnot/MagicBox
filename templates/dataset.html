@@ -1,0 +1,15 @@
+{% extends 'base\base.html' %}
+{% block content %}
+    <h2>{{ ds.long_name }}</h2>
+    <hr>
+    <table border="1">
+    <tr>
+        <th>Назва таблиці</th>
+    </tr>
+    {% for table in tables %}
+        <tr>
+            <td><a href="/table/{{ table.id }}">{{ table.long_name }}</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

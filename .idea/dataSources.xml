@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="457612764">
-    <data-source source="LOCAL" name="Sqlite (Xerial) - mydb.sqlite" uuid="fd2ab91f-a5ec-4fcd-9ee6-b5cd3de4c19f">
+  <component name="DataSourceManagerImpl" format="xml">
+    <data-source source="LOCAL" name="Sqlite (Xerial) - MagicBox.sqlite" uuid="3cd27ef2-bcef-4431-a0e4-5272f882bfc1">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:mydb.sqlite</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/MagicBox.sqlite</jdbc-url>
     </data-source>
   </component>
 </project>

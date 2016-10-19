@@ -20,6 +20,11 @@ from DataBox.views import *
 urlpatterns = [
     url(r'^$', hello),
     url(r'^admin/', admin.site.urls),
-    url(r'^index/$', display_meta),
+    # url(r'^index/$', display_meta),
+    url(r'^datasets/$', get_objects, {'template_name': 'datasets.html'}),
+    url(r'^dataset/(\d+)/$', dataset),
+    url(r'^dictionaries/$', get_objects, {'template_name': 'dictionaries.html'}),
+    url(r'^dictionary/(\d+)/$', dictionary),
     url(r'^add_dictionary/$', add_dictionary),
+    url(r'^add_dataset/$', add_dataset),
 ]
