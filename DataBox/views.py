@@ -17,7 +17,7 @@ def hello(request):
 def get_objects(request, template_name):
     """Отримання всіх DataSet або словників"""
     if template_name == 'datasets.html':
-        ds = DataSet.objects.filter(is_table=False)
+        ds = DataSet.dataset_objects.all()
     if template_name == 'dictionaries.html':
         d = Dictionary.objects.all()
     return render_to_response(template_name, locals())

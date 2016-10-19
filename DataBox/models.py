@@ -56,6 +56,15 @@ class DictionaryValue(models.Model):
         return '%s %s' % (self.id, self.value)
 
 
+class DataSetManager(models.Manager):
+    def get_query_set(self):
+        return super(DataSetManager, self).get_query_set().filter(is_table=False)
+
+
+class TableManager(models.Manager):
+    def get_query_set(self):
+        return super(TableManager, self).get_query_set().filter(is_table=True)
+
 @python_2_unicode_compatible  # only if you need to support Python 2
 class DataSet(models.Model):
     """Модель для роботи із DataSet-ами та їхніми таблицями"""
@@ -86,14 +95,17 @@ class DataSet(models.Model):
     user_id = models.IntegerField(blank=True, null=True)    # кто создал
     date_create = models.DateTimeField(default=datetime.datetime.now)
 
+    objects = models.Manager()  # Менеджер по умолчанию.
+    dataset_objects = DataSetManager()  # Специальный менеджер.
+    table_objects = TableManager()
+    __name__ = 'dataset'
+
     class Meta:
         db_table = 'dataset'
 
-    __name__ = 'dataset'
-
     def __str__(self):
         return '%s %s %s' % (self.id, ('table' if self.is_table else 'null'), self.long_name)
-    #
+
 
 @python_2_unicode_compatible
 class DataSetAttribute(models.Model):
