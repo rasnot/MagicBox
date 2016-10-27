@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^dictionary/(\d+)/$', dictionary),
     url(r'^add_dictionary/$', add_dictionary),
     url(r'^add_dataset/$', add_dataset),
+    url(r'^delete_dataset/(\d+)/$', delete_dataset),
 ]

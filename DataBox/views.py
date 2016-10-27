@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from DataBox.models import *
 import datetime
+import json
 from django.template import RequestContext
 from django.template.context_processors import csrf
 from DataBox.forms import *
@@ -64,4 +65,18 @@ def add_dataset(request):
         form = DataSetForm()
     locals().update(csrf(request))
     return render_to_response('add_dataset.html', locals())
-#def views_list_of_dictionary
+
+
+def delete_dataset(request, id):
+    """
+        Видалення DataSet
+        :param id: id DataSet для видалення
+    """
+    ds = DataSet.objects.get(id=id)
+    ds_t = DataSet.table_objects.filter(dataSet=ds.id)
+    data = {'is_delete': False}
+    if ds_t.__len__() == 0:
+        ds.delete()
+        data['is_delete'] = True
+        return HttpResponse(json.dumps(data), content_type="application/json")
+    return HttpResponse(json.dumps(data), content_type="application/json")

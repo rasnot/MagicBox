@@ -57,13 +57,13 @@ class DictionaryValue(models.Model):
 
 
 class DataSetManager(models.Manager):
-    def get_query_set(self):
-        return super(DataSetManager, self).get_query_set().filter(is_table=False)
+    def get_queryset(self):
+        return super(DataSetManager, self).get_queryset().filter(is_table=False)
 
 
 class TableManager(models.Manager):
-    def get_query_set(self):
-        return super(TableManager, self).get_query_set().filter(is_table=True)
+    def get_queryset(self):
+        return super(TableManager, self).get_queryset().filter(is_table=True)
 
 @python_2_unicode_compatible  # only if you need to support Python 2
 class DataSet(models.Model):

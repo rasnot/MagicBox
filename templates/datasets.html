@@ -2,18 +2,20 @@
 {% block content %}
     <h1>DataSets</h1>
     <hr>
-    <p><a href="/add_dataset/">Додати словник</a></p>
+    <p><a href="/add_dataset/">Додати DataSet</a></p>
     {% if ds %}
         <table class="table table-striped table-bordered table-hover" style="width:90%" align="center">
         <thead>
         <tr>
             <th>Назва DataSet</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         {% for dataSet in ds %}
-            <tr>
+            <tr id = '{{ dataSet.id }}'>
                 <td><a href="/dataset/{{ dataSet.id }}">{{ dataSet.long_name }}</a></td>
+                <td style="width: 4%"><a class="remover-link"><button>X</button></a></td>
             </tr>
         {% endfor %}
         </tbody>
