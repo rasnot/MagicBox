@@ -1,16 +1,3 @@
-// function del_obj(id) {
-//    row = $(this).closest("tr")
-//    id1 = row.attr("id")
-//    alert(id1)
-//    $.ajax({
-//    url: '/delete_dataset/' + id + '/',
-//    success: function(data) {
-//            row.fadeOut("normal", function() {
-//            $(this).remove();
-//        });
-//    }
-//    });
-//}
 
 $(".remover-link").on('click', function(e) {
     row = $(this).closest("tr");
@@ -27,4 +14,8 @@ $(".remover-link").on('click', function(e) {
             }
         }
     });
-})
+});
+
+$(document).ready(function(){
+    $("table").tablesorter({headers: { 1: { sorter: false}}});
+});

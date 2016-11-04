@@ -2,14 +2,18 @@
 {% block content %}
     <h2>{{ ds.long_name }}</h2>
     <hr>
-    <table class="table table-striped table-bordered table-hover" style="width:90%" align="center">
+    <table class="table table-striped table-bordered table-hover" style="width:90%" align="center" id="dataset_table">
+    <thead>
     <tr>
         <th>Назва таблиці</th>
     </tr>
+    </thead>
+    <tbody>
     {% for table in tables %}
         <tr>
             <td><a href="/table/{{ table.id }}">{{ table.long_name }}</a></td>
         </tr>
     {% endfor %}
+    </tbody>
     </table>
 {% endblock %}
