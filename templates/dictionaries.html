@@ -3,14 +3,8 @@
     <h1>Словники</h1>
     <hr>
     <p><a href="/add_dictionary/">Додати словник</a></p>
-    <table border="1">
-    <tr>
-        <th>Назва словника</th>
-    </tr>
-    {% for dictionary in d %}
-        <tr>
-            <td><a href="/dictionary/{{ dictionary.id }}">{{ dictionary.name }}</a></td>
-        </tr>
-    {% endfor %}
-    </table>
+
+    <table id="dicts" class="table table-striped table-hover"></table>
+    <br>
+    <table id="dict_vals" class="table table-striped table-hover"></table>
 {% endblock %}

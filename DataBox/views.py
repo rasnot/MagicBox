@@ -8,6 +8,7 @@ from django.template import RequestContext
 from django.template.context_processors import csrf
 from DataBox.forms import *
 from DataBox.models import Dictionary
+from DataBox.grids import *
 
 
 def hello(request):
@@ -45,7 +46,7 @@ def add_dictionary(request):
             cd = form.cleaned_data
             dictionary = Dictionary(name=cd['name'])
             dictionary.save()
-            return HttpResponseRedirect(r'index/')
+            return HttpResponseRedirect(r'/dictionaries/')
     else:
         form = Add_New_Dictionary()
     c = locals()
@@ -78,5 +79,47 @@ def delete_dataset(request, id):
     if ds_t.__len__() == 0:
         ds.delete()
         data['is_delete'] = True
-        return HttpResponse(json.dumps(data), content_type="application/json")
-    return HttpResponse(json.dumps(data), content_type="application/json")
+        return HttpResponse(json_encode(data), content_type="application/json")
+    return HttpResponse(json_encode(data), content_type="application/json")
+
+
+def dataset_jq(request):
+    items = Dictionary.objects.all()
+
+    items = items.values() if items.count() > 0 else []
+    data = {
+            'rows': [obj for obj in items],
+        }
+    return HttpResponse(json_encode(data), content_type="application/json")
+
+
+def dataset_grid_handler(request):
+    # handles pagination, sorting and searching
+    grid = DataSetGrid()
+    return HttpResponse(grid.get_json(request), content_type="application/json")
+
+
+def dataset_grid_config(request):
+    # build a config suitable to pass to jqgrid constructor
+    grid = DataSetGrid()
+    return HttpResponse(grid.get_config(), content_type="application/json")
+
+
+def dict_grid_handler(request):
+    grid = DictGrid()
+    return HttpResponse(grid.get_json(request), content_type="application/json")
+
+
+def dict_grid_config(request):
+    grid = DictGrid()
+    return HttpResponse(grid.get_config(), content_type="application/json")
+
+
+def dict_val_grid_handler(request, dict_id=1):
+    grid = DictValGrid(dict_id)
+    return HttpResponse(grid.get_json(request), content_type="application/json")
+
+
+def dict_val_grid_config(request):
+    grid = DictValGrid()
+    return HttpResponse(grid.get_config(), content_type="application/json")

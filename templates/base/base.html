@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href={% static "css/themes/blue/style.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "table/jqGrid/css/ui.jqgrid-bootstrap.css" %}>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href={% static "css/themes/blue/style.css" %}>
-    <script type="text/javascript" src={% static "js/table/jquery.tablesorter.js" %}></script>
+    <script src="{% static 'table/jqGrid/js/jquery.jqGrid.js' %}"></script>
+    <script src="{% static 'table/jqGrid/js/i18n/grid.locale-uk.js' %}"></script>
+    <script type="text/javascript" src={% static "table/jquery.tablesorter.js" %}></script>
     <title>{% block title %}MagicBox{% endblock %}</title>
 </head>
 <body>
@@ -23,5 +26,6 @@
         </div>
     </div>
 </body>
-    <script type="text/javascript" src={% static "js/delete_obj.js" %}></script>
+    <script type="text/javascript" src={% static "js/datasets.js" %}></script>
+    <script type="text/javascript" src={% static "js/dictionaries.js" %}></script>
 </html>

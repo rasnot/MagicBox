@@ -28,4 +28,13 @@ urlpatterns = [
     url(r'^add_dictionary/$', add_dictionary),
     url(r'^add_dataset/$', add_dataset),
     url(r'^delete_dataset/(\d+)/$', delete_dataset),
+
+    url(r'^dataset_jq/$', dataset_jq),
+    url(r'^dataset_grid/$', dataset_grid_handler, name='dataset_grid_handler'),
+    url(r'^dataset_grid/cfg/$', dataset_grid_config, name='dataset_grid_config'),
+    url(r'^dict_grid/$', dict_grid_handler, name='dict_grid_handler'),
+    url(r'^dict_grid/cfg/$', dict_grid_config, name='dict_grid_config'),
+    # url(r'^dict_val_grid/$', dict_val_grid_handler, name='dict_val_grid_handler'),
+    url(r'^dict_val_grid/(\d+)/$', dict_val_grid_handler, name='dict_val_grid_handler'),
+    url(r'^dict_val_grid/cfg/$', dict_val_grid_config, name='dict_val_grid_config'),
 ]
